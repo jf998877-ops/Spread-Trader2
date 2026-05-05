@@ -481,7 +481,7 @@ def strike_width(price: float) -> float:
     return 10.0
 
 
-def next_monthly_expiration(target_dte: int = 30) -> datetime:
+def next_monthly_expiration(target_dte: int = 35) -> datetime:
     today = datetime.now()
     target = today + timedelta(days=target_dte)
     year, month = target.year, target.month
@@ -489,7 +489,7 @@ def next_monthly_expiration(target_dte: int = 30) -> datetime:
     first_friday_offset = (4 - first_day.weekday()) % 7
     third_friday = first_day + timedelta(days=first_friday_offset + 14)
     # Always require at least 30 DTE — never return an expiration closer than that
-    min_dte = max(30, target_dte // 2)
+    min_dte = max(35, target_dte // 2)
     if (third_friday - today).days < min_dte:
         if month == 12:
             year, month = year + 1, 1
